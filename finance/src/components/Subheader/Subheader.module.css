@@ -1,13 +1,4 @@
-.subheader {
-    background: linear-gradient(
-      to bottom,
-      var(--header-gradient-top),
-      var(--header-gradient-bottom)
-    );
-    position: relative;
-    height: 280px;
-    background-color: #5d707c;
-  }
+
   
   .container {
     max-width: var(--site-width);

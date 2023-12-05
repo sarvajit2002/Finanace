@@ -1,11 +1,11 @@
 import React from 'react'
 import AppRouter from './components/Router/AppRouter'
-
+//import Charts from './Charts/Charts'
 function App() {
   return (
-    <div>
-    <AppRouter/>
-    </div>
+    <>
+    <AppRouter />
+  </>
   )
 }
 

@@ -1,25 +1,95 @@
-import React from "react";
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import "./Navbar.css";
+import { HamburgetMenuClose, HamburgetMenuOpen } from "./Icons";
+//import { useSelector } from "react-redux";
 
-import styles from "./Header.module.css";
-import { ReactComponent as Logo } from "../../assets/icons/chart-line.svg";
-import { Link } from "react-router-dom";
+function Header() {
+  const [click, setClick] = useState(false);
 
-const Header = () => {
+  const handleClick = () => setClick(!click);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.clear();
+    alert("Logout Successfully");
+    navigate("/login");
+  };
   return (
-    <header className={styles.header}>
-      <div className={styles.container}>
-        <Link to="/" className={styles.logoContainer}>
-          <Logo className={styles.logo} />
-          <span>Stock</span>
-        </Link>
+    <>
+      <nav className="navbar">
+        <div className="nav-container">
+          <NavLink exact to="/" className="nav-logo">
+            <span>Stock Price Prediction</span>
+            {/* <i className="fas fa-code"></i> */}
+            {/*<span className="icon">
+              <ChartLineDown />
+  </span>*/}
+          </NavLink>
 
-        <div className={styles.userContainer}>
-          <div className={styles.user}>S</div>
-          <span>Sarvajit</span>
+          <ul className={click ? "nav-menu active" : "nav-menu"}>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Home
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/about"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                About
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/contact"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Contact Us
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/signin"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleLogout}
+              >
+                Logout
+              </NavLink>
+            </li>
+          </ul>
+          <div className="nav-icon" onClick={handleClick}>
+            {/* <i className={click ? "fas fa-times" : "fas fa-bars"}></i> */}
+
+            {click ? (
+              <span className="icon">
+                <HamburgetMenuOpen />{" "}
+              </span>
+            ) : (
+              <span className="icon">
+                <HamburgetMenuClose />
+              </span>
+            )}
+          </div>
         </div>
-      </div>
-    </header>
+      </nav>
+    </>
   );
-};
+}
 
 export default Header;
